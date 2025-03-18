@@ -68,7 +68,9 @@ const login = async (req, res) => {
         })
         .json({
           message: "Login successfully :)",
-          redirectUrl: "/",
+          refreshToken,
+          accessToken,
+          // redirectUrl: "/",
         });
     } else {
       res.status(500).json({ error: "Token generation failed" });
