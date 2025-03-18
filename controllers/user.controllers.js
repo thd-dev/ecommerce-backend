@@ -58,19 +58,24 @@ const login = async (req, res) => {
         .cookie("accessToken", accessToken, {
           httpOnly: true,
           secure: true,
-          // maxAge: "1d",
+          sameSite: "None",
+          domain: process.env.FRONTEND_URL,
+          path: "/",
           maxAge: 24 * 60 * 60 * 1000,
         })
         .cookie("refreshToken", refreshToken, {
           httpOnly: true,
           secure: true,
+          sameSite: "None",
+          domain: process.env.FRONTEND_URL,
+          path: "/",
           maxAge: 30 * 24 * 60 * 60 * 1000,
         })
         .json({
           message: "Login successfully :)",
           refreshToken,
           accessToken,
-          // redirectUrl: "/",
+          redirectUrl: "/",
         });
     } else {
       res.status(500).json({ error: "Token generation failed" });
