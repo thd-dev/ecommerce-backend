@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import path from "path";
 dotenv.config();
 
 const app = express();
@@ -17,8 +18,8 @@ app.use(
 );
 
 app.use(cookieParser("YourSecretString"));
-
-app.use(express.static("public"));
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 import Admin from "./routes/admin.routes.js";
 import User from "./routes/user.routes.js";
